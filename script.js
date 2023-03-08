@@ -1,13 +1,13 @@
-var startButton = document.getElementById("btnStart")
-var pauseButton = document.getElementById("btnPause")
+var pauseButton = document.getElementById("btnStartPause")
+var display = document.querySelector("#timer")
 var interval = document.getElementById("interval")
 let duration = 60*25
 let delay = 60*5
 let pause
 let contPause = 0
+let timer = duration
 
-function startTimer(duration, display){
-    var timer = duration, minutes, seconds
+function startTimer(durationLocal, display){
 
     pause = setInterval(function() {
         minutes = parseInt(timer / 60 , 10) 
@@ -36,15 +36,13 @@ function startTimer(duration, display){
     }, 1000);
 } 
 
-startButton.addEventListener('click', function(){
-    var display = document.querySelector("#timer")
+function start(){
     startTimer(duration, display)
-    startButton.disabled = true
-    if (timer == 0){
-        startButton.disabled = false
-    }  
-})
+    document.getElementById("startPause").innerHTML = ('<button id="btnStartPause" onclick="pauseTimer()">Pause</button>');
+    console.log('teste')
+}
 
 function pauseTimer(){
     clearInterval(pause)
+    document.getElementById("startPause").innerHTML = ('<button id="btnStartPause" onclick="start()">Start</button>')
 }
