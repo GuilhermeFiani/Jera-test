@@ -1,3 +1,5 @@
+var startButton = document.getElementById("btnStart")
+
 function startTimer(duration, display){
     var timer = duration, minutes, seconds
 
@@ -16,8 +18,8 @@ function startTimer(duration, display){
     }, 1000);
 }
 
-window.onload = function(){
+startButton.addEventListener('click', function(){
     var duration = 60 * 25
     var display = document.querySelector("#timer")
     startTimer(duration, display)
-}
+})
