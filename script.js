@@ -17,6 +17,13 @@ function startTimer(durationLocal, display){
             contPomodoro += 1
             audio.play()
             updateTimer()
+            if (window.Notification&&Notification.permission!=="denied") {
+                Notification.requestPermission(function(status){
+                    let n = new Notification('Pomodoro', {
+                    body:'Tempo esgotado.'
+                })
+            })
+        }
             document.getElementById("total").textContent = "Quantidade de pomodoros: " + contPomodoro
             if (contPomodoro % 4 == 0){
                 var res = confirm('Você já fez 4 pomodoros, aceita aumentar o intervalo de descanso para 10 minutos?')
@@ -26,6 +33,7 @@ function startTimer(durationLocal, display){
                     return 
                 }
             }
+
             if (interval.checked){
                 timerInterval()
                 return
@@ -88,3 +96,11 @@ function pauseTimer(){
     clearInterval(pause)
     document.getElementById("startPause").innerHTML = ('<button id="btnStartPause" onclick="start()">Start</button>')
 }
+
+document.addEventListener('DOMContentLoaded', function(){
+    if(!Notification){
+        return
+    }
+    if(Notification.permission !== "granted") 
+    Notification.requestPermission()
+})
