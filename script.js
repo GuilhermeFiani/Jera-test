@@ -10,29 +10,55 @@ var audio = new Audio ('som.wav')
 
 function startTimer(durationLocal, display){
     pause = setInterval(function() {
-        updateTimer()
         --timer
+        updateTimer()
         if(timer < 0){
             clearInterval(pause) 
             contPomodoro += 1
-            audio.play() 
-            
+            audio.play()
+            updateTimer()
+            document.getElementById("total").textContent = "Quantidade de pomodoros: " + contPomodoro
+            if (contPomodoro % 4 == 0){
+                var res = confirm('Você já fez 4 pomodoros, aceita aumentar o intervalo de descanso para 10 minutos?')
+                if (res == true){
+                    timer = 60*10
+                    timerUp()
+                    return 
+                }
+            }
             if (interval.checked){
                 timerInterval()
                 return
             }
-                pauseTimer() 
-                timer = duration
-                updateTimer()
-        }    
+            pauseTimer() 
+            timer = duration
+            updateTimer()
+        }   
+
     }, 1000);
 } 
+
+function timerUp(){
+    timer = 60 * 10
+    updateTimer()
+    pause = setInterval(function(){
+        --timer 
+        updateTimer()
+        if (timer < 0){
+            clearInterval(pause)
+            pauseTimer()
+            timer = duration
+            updateTimer()
+            audio.play()
+        }
+    },1000)
+}    
 
 function timerInterval(){
     timer = delay
     pause = setInterval(function(){
-        updateTimer()
         --timer 
+        updateTimer()
         if (timer < 0){
             clearInterval(pause)
             pauseTimer()
