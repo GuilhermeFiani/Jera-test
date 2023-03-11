@@ -94,7 +94,7 @@ function timerInterval(){
 
 function start(){
     startTimer(duration, display)
-    document.getElementById("startPause").innerHTML = ('<button id="btnStartPause" class="btn btn-outline-secondary btn-lg" onclick="pauseTimer()">Pausar</button>')
+    document.getElementById("startPause").innerHTML = ('<button id="btnStartPause" class="btn btn-outline-warning btn-lg" onclick="pauseTimer()">Pausar</button>')
 }
 
 function pauseTimer(){
